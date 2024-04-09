@@ -47,3 +47,12 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      - uses: jangjunha/pact-broker-actions/record-deployment@main
+        with:
+          pacticipant: ftgo-rest-web
+          environment: production
+          version: ${{ github.sha }}
+          broker_url: ${{ vars.PACT_BROKER_URL }}
+          broker_username: ${{ secrets.PACT_BROKER_USERNAME }}
+          broker_password: ${{ secrets.PACT_BROKER_PASSWORD }}
+        continue-on-error: true
