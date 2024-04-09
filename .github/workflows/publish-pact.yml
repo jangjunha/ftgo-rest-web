@@ -1,0 +1,24 @@
+name: Publish Pact Files
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: pact
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: yarn
+      - run: yarn install
+      - run: yarn test
+      - uses: jangjunha/pact-broker-actions/publish@main
+        with:
+          version: ${{ github.sha }}
+          broker_url: ${{ vars.PACT_BROKER_URL }}
+          broker_username: ${{ secrets.PACT_BROKER_USERNAME }}
+          broker_password: ${{ secrets.PACT_BROKER_PASSWORD }}

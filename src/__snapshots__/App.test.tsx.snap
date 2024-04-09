@@ -1,0 +1,13 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`GET /restaurants/ > returns an HTTP 200 and a list of restaurants 1`] = `
+[
+  <ul
+    data-testid="restaurant-list"
+  >
+    <li>
+      Nixt Coffee
+    </li>
+  </ul>,
+]
+`;
